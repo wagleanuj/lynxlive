@@ -35,27 +35,34 @@ app.get('/', (req, res, next) => {
 
 app.post('/products', async (req, res, next) => {
     const { currency, count } = req.body;
-    const supportedCurrencies = new Set(['USD', 'CAD'])
-    if (currency && !supportedCurrencies.has(currency)) {
-        return res.status(400).json({ error: currency + " is not supported.", result: null })
-    }
-    const products = await Product.findAll({
-        limit: count || 5,
-        where: {
-            productViewed: {
-                [Op.gt]: 1
-            }
-        },
-        order: [['productViewed', 'DESC']]
-    });
-    const exchangeRate = (currency && currency !== "USD") ? await Currency.getRate(currency) : 1;
+    try {
 
-    const data = products.map(product => {
-        const json = product.toJSON();
-        json.price = exchangeRate * json.price;
-        return json;
-    });
-    return res.status(200).json({ result: data, error: null })
+        const supportedCurrencies = new Set(['USD', 'CAD'])
+        if (currency && !supportedCurrencies.has(currency)) {
+            return res.status(400).json({ error: currency + " is not supported.", result: null })
+        }
+        const products = await Product.findAll({
+            limit: count || 5,
+            where: {
+                productViewed: {
+                    [Op.gt]: 1
+                }
+            },
+            order: [['productViewed', 'DESC']]
+        });
+        const exchangeRate = (currency && currency !== "USD") ? await Currency.getRate(currency) : 1;
+
+        const data = products.map(product => {
+            const json = product.toJSON();
+            json.price = exchangeRate * json.price;
+            return json;
+        });
+        return res.status(200).json({ result: data, error: null })
+    } catch (err) {
+        console.log('Error :', err.message);
+        return res.status(500).json({ error: "Internal Server Error", result: null })
+
+    }
 
 })
 
@@ -67,7 +74,7 @@ app.post('/product', async (req, res, next) => {
             return res.status(400).json({ error: currency + " is not supported.", result: null })
         }
         const found = await Product.findOne({ where: { id: id } });
-        
+
         if (!found) {
             return res.status(404).json({ error: "Product does not exist.", result: null });
         }
