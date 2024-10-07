@@ -1,9 +1,6 @@
 import express from "express";
-import { Op, Sequelize } from "sequelize";
 import dotenv from "dotenv";
 import { sequelize } from "./models/db.js";
-import { Product } from "./models/productModel.js";
-import { Currency } from "./utils.js";
 import { productRouter } from "./routes/products.js";
 
 dotenv.config();
@@ -29,8 +26,7 @@ app.use(express.json());
 
 
 app.get('/', (req, res, next) => {
-    console.log('OK');
-    res.send('OK');
+    return res.status('200').send('API is running on /api/');
 })
 
 //use versioning so that it helps us upgrade api without breaking existing version

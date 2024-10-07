@@ -50,14 +50,14 @@ export async function getProductById(req, res, next) {
  * @returns {*}
  */
 export async function getMostViewedProducts(req, res, next) {
-    const { currency, count } = req.query;
+    const { currency, limit } = req.query;
     try {
         const supportedCurrencies = new Set(['USD', 'CAD'])
         if (currency && !supportedCurrencies.has(currency)) {
             return res.status(400).json({ error: currency + " is not supported.", result: null })
         }
         const products = await Product.findAll({
-            limit: count || 5,
+            limit: parseInt(limit || '5'),
             where: {
                 productViewed: {
                     [Op.gt]: 1
