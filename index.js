@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { sequelize } from "./models/db.js";
 import { productRouter } from "./routes/products.js";
+import { config } from "./config.js";
 
 dotenv.config();
 
@@ -20,8 +21,8 @@ async function init() {
 }
 
 
-
-const app = express();
+//export app for test purposes
+export const app = express();
 app.use(express.json());
 
 
@@ -34,7 +35,7 @@ app.use("/api/v1/products", productRouter)
 
 
 init().then(() => {
-    const port = process.env.SERVER_PORT
+    const port = config.SERVER_PORT;
     app.listen(port, () => {
         console.log('Server is listening on port ', port);
     })

@@ -1,0 +1,393 @@
+{
+	"info": {
+		"_postman_id": "2ae4cf2f-ef61-4af9-8de5-642401782852",
+		"name": "api/v1/products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38813882"
+	},
+	"item": [
+		{
+			"name": "Get Product by Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the response schema for required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.have.property('id');\r",
+							"    pm.expect(responseData).to.have.property('name');\r",
+							"    pm.expect(responseData).to.have.property('price');\r",
+							"    pm.expect(responseData).to.have.property('isDeleted');\r",
+							"    pm.expect(responseData).to.have.property('productViewed');\r",
+							"    pm.expect(responseData).to.have.property('createdDate');\r",
+							"    pm.expect(responseData).to.have.property('updatedDate');\r",
+							"    pm.expect(responseData).to.have.property('deletedDate');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"count\": 5, \"currency\": \"USD\", \"id\": 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/v1/products/1?currency=CAD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "CAD"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"count\": 5, \"currency\": \"USD\", \"id\": 1}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/products/3?currency=CAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"3"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "CAD"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "239"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ef-4FmX0efy7pXpCkL5jIPVJYyjPg8\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Oct 2024 22:35:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": null,\n    \"result\": {\n        \"id\": 1,\n        \"name\": \"Kawasaki Ninja 650\",\n        \"price\": 14.300947500000001,\n        \"description\": null,\n        \"isDeleted\": 0,\n        \"productViewed\": 0,\n        \"createdDate\": \"2022-07-07T00:00:00.000Z\",\n        \"updatedDate\": \"2022-07-07T00:00:00.000Z\",\n        \"deletedDate\": null\n    }\n}"
+				},
+				{
+					"name": "fail",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"count\": 5, \"currency\": \"USD\", \"id\": 1}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/products/100?currency=CAD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"100"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "CAD"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "49"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"31-rdAQiL6HnBOWZws8LpSkD6jTmgY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Oct 2024 22:36:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Product does not exist.\",\n    \"result\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Most Viewed Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/v1/products/most-viewed?currency=USD&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"most-viewed"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "USD"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "fail",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/products/most-viewed?currency=NPR&limit=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"most-viewed"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "NPR"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2f-AE/poTVz/I2BDvN2+5JCn6ms4Ec\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Oct 2024 22:39:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"NPR is not supported.\",\n    \"result\": null\n}"
+				},
+				{
+					"name": "success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/products/most-viewed?currency=USD&limit=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"most-viewed"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "USD"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "430"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1ae-roZZO3ZwC0M/oQCyNOzMbX67Jis\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Oct 2024 22:40:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"result\": [\n        {\n            \"id\": 1,\n            \"name\": \"Kawasaki Ninja 650\",\n            \"price\": 10.5,\n            \"description\": null,\n            \"isDeleted\": 0,\n            \"productViewed\": 3,\n            \"createdDate\": \"2022-07-07T00:00:00.000Z\",\n            \"updatedDate\": \"2024-10-07T22:40:06.000Z\",\n            \"deletedDate\": null\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Kawasaki Ninja 850\",\n            \"price\": 12.33,\n            \"description\": null,\n            \"isDeleted\": 0,\n            \"productViewed\": 2,\n            \"createdDate\": \"2022-07-07T00:00:00.000Z\",\n            \"updatedDate\": \"2024-10-07T22:39:59.000Z\",\n            \"deletedDate\": null\n        }\n    ],\n    \"error\": null\n}"
+				}
+			]
+		}
+	]
+}

@@ -135,8 +135,19 @@ DB_NAME=
 SERVER_PORT=4000
 CURRENCY_LAYER_API_KEY=
 ```
-## Running
+## Running Server
 To run the node js server,
 -  perform an `npm i` to install all the required dependencies.
 - copy `.env.default` as `.env` file and fill out the environment variables
 - perform `npm run start` to start the server.
+
+## Running Tests
+To run the tests, you will need to create a new database called 'lynx_jest_test' and seed the table product using insert commands of product.sql. After seeding, 
+- Run `npm run test` to run the tests.
+Example Result of test run:
+![Test Run](./submission/image.png)
+
+
+## Postman file
+Postman json file can be found at the submission folder `submission/postman.json`
+

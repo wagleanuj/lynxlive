@@ -2,7 +2,6 @@ import { DataTypes, NOW, Sequelize } from "sequelize";
 import { sequelize } from "./db.js";
 
 export const Product = sequelize.define('Product', {
-
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -35,4 +34,11 @@ export const Product = sequelize.define('Product', {
     },
 
 
-}, { tableName: 'product', paranoid: true, timestamps: true, createdAt: 'createdDate', deletedAt: 'deletedDate', updatedAt: 'updatedDate' })
+}, {
+    tableName: 'product',
+    paranoid: true,
+    timestamps: true,
+    createdAt: 'createdDate',
+    deletedAt: 'deletedDate',
+    updatedAt: 'updatedDate'
+})
