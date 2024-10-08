@@ -48,6 +48,6 @@ app.use("/api/v1/products", productRouter)
 init().then(() => {
     const port = config.SERVER_PORT;
     app.listen(port, () => {
-        logger.info('Server is listening on port ', port);
+        logger.info('Server is listening ', { port });
     })
 })

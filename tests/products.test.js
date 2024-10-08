@@ -17,7 +17,7 @@ describe('Product API', () => {
             //requesting again should increment the view count
             const curr = response.body.result.productViewed;
             response = await request(app).get('/api/v1/products/1?currency=USD');
-            expect(response.body.result.productViewed).toBe(curr+1);
+            expect(response.body.result.productViewed).toBe(curr + 1);
         });
 
         it('should return 404 for a non-existent product', async () => {
@@ -32,7 +32,7 @@ describe('Product API', () => {
             const response = await request(app).get('/api/v1/products/most-viewed');
             expect(response.status).toBe(200);
             expect(Array.isArray(response.body.result)).toBe(true);
-            expect(response.body.result.length).toBeLessThanOrEqual(5); 
+            expect(response.body.result.length).toBeLessThanOrEqual(5);
         });
 
         it('should return the specified number of most viewed products', async () => {
