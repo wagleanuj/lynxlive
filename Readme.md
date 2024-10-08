@@ -143,7 +143,7 @@ CURRENCY_LAYER_API_KEY=
 To run the node js server,
 -  perform an `npm i` to install all the required dependencies.
 - copy `.env.default` as `.env` file and fill out the environment variables
-- perform `npm run start` to start the server.
+- perform `npm run start:dev` to start the server.
 
 ## Running Tests
 To run the tests, you will need to create a new .env file called `.env.test` and fill out the environment variables.

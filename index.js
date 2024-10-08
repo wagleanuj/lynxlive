@@ -2,25 +2,38 @@ import { config } from "./config.js";
 import express from "express";
 import { sequelize } from "./models/db.js";
 import { productRouter } from "./routes/products.js";
+import morgan from "morgan";
+import logger from "./logger.js";
 
 
 async function init() {
     await sequelize.authenticate().then(res => {
-        console.log('Authenticated to db');
+        logger.info('Successfully authenticated to db.');
     }).catch(err => {
-        console.log('Could not connect to db.. exitting', err);
+        logger.error("Failed to authenticate to db. Please check your configuration. ", { error: err.message })
         process.exit(1);
     });
     await sequelize.sync().then(res => {
-        console.log('Db Synced')
+        logger.info('Successfully synced db.');
     }).catch(err => {
-        console.log('Db could not be synced')
+        logger.error("Failed to sync db. ", { error: err.message });
+        process.exit(1);
     })
 }
 
 
-//export app for test purposes
 export const app = express();
+
+//log requests using morgan
+app.use(morgan('combined', {
+    stream: {
+        write: (message) => logger.info(message.trim())
+    }
+}));
+
+
+
+//export app for test purposes
 app.use(express.json());
 
 
@@ -35,6 +48,6 @@ app.use("/api/v1/products", productRouter)
 init().then(() => {
     const port = config.SERVER_PORT;
     app.listen(port, () => {
-        console.log('Server is listening on port ', port);
+        logger.info('Server is listening on port ', port);
     })
 })

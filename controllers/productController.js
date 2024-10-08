@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
 import { Product } from "../models/productModel.js";
 import { Currency } from "../utils.js";
+import logger from "../logger.js";
 /**
  * Gets the product by id
  * @param {Express.Request} req 
@@ -11,7 +12,6 @@ import { Currency } from "../utils.js";
 export async function getProductById(req, res, next) {
     const { id } = req.params;
     const { currency } = req.query;
-    console.log("Requested to view ", id, currency)
     try {
         const supportedCurrencies = new Set(['USD', 'CAD'])
         if (currency && !supportedCurrencies.has(currency)) {
@@ -36,7 +36,7 @@ export async function getProductById(req, res, next) {
 
         return res.status(200).json({ error: null, result: { ...data, price } })
     } catch (err) {
-        console.log('Error :', err.message);
+        logger.warn("Failed to get product", { id, currency, error: err.message })
         return res.status(500).json({ error: "Internal Server Error", result: null })
     }
 
@@ -74,7 +74,7 @@ export async function getMostViewedProducts(req, res, next) {
         });
         return res.status(200).json({ result: data, error: null })
     } catch (err) {
-        console.log('Error :', err.message);
+        logger.warn("Failed to get most viewed products ", { limit, currency, error: err.message })
         return res.status(500).json({ error: "Internal Server Error", result: null })
     }
 }

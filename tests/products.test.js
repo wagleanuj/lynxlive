@@ -1,7 +1,6 @@
 import { app } from "../index.js";
 import supertest from "supertest";
 const request = supertest;
-console.log("NODE_ENV", process.env.NODE_ENV)
 
 
 
