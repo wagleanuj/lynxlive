@@ -122,8 +122,6 @@ GET /api/v1/products/most-viewed?limit=3&currency=USD
 }
 ```
 
----
-
 
 
 ## Environment Variables
@@ -139,7 +137,12 @@ DB_NAME=
 SERVER_PORT=4000
 CURRENCY_LAYER_API_KEY=
 ```
-## Running Server
+---
+## Scripts
+- `npm run start:dev` : starts dev server using `.env`
+- `npm run start:prod`: starts prod server using `.env.production`
+
+## Running Dev Server
 To run the node js server,
 -  perform an `npm i` to install all the required dependencies.
 - copy `.env.default` as `.env` file and fill out the environment variables
