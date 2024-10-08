@@ -1,5 +1,18 @@
-import dotenv from "dotenv"
-dotenv.config();
+import dotenv from "dotenv";
+
+if (process.env.NODE_ENV === 'test') {
+    dotenv.config({
+        path: ".env.test"
+    });
+
+} else if (process.env.NODE_ENV === 'production') {
+    dotenv.config({
+        path: ".env.production"
+    });
+} else {
+    dotenv.config({
+    });
+}
 
 const defaultConfig = {
     DB_USERNAME: process.env["DB_USERNAME"],
@@ -10,11 +23,6 @@ const defaultConfig = {
     CURRENCY_LAYER_API_KEY: process.env["CURRENCY_LAYER_API_KEY"]
 }
 
-const configs = {
-    "development": defaultConfig,
-    "test": { ...defaultConfig, DB_NAME: 'lynx_jest_test', SERVER_PORT: 4040 },
-    "production": defaultConfig
-}
 
 
-export const config = configs[process.env.NODE_ENV || "development"];
+export const config = defaultConfig

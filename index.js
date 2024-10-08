@@ -1,10 +1,8 @@
+import { config } from "./config.js";
 import express from "express";
-import dotenv from "dotenv";
 import { sequelize } from "./models/db.js";
 import { productRouter } from "./routes/products.js";
-import { config } from "./config.js";
 
-dotenv.config();
 
 async function init() {
     await sequelize.authenticate().then(res => {

@@ -127,6 +127,10 @@ GET /api/v1/products/most-viewed?limit=3&currency=USD
 
 
 ## Environment Variables
+For different stages:
+- production: Use `.env.production`
+- development: Use `.env`
+- test: Use `.env.test`
 ```
 DB_USERNAME=
 DB_PASSWORD=
@@ -142,7 +146,8 @@ To run the node js server,
 - perform `npm run start` to start the server.
 
 ## Running Tests
-To run the tests, you will need to create a new database called 'lynx_jest_test' and seed the table product using insert commands of product.sql. After seeding, 
+To run the tests, you will need to create a new .env file called `.env.test` and fill out the environment variables.
+Seed the table product using insert commands of product.sql. After seeding, 
 - Run `npm run test` to run the tests.
 Example Result of test run:
 ![Test Run](./submission/image.png)
